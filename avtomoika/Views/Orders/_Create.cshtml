@@ -1,0 +1,53 @@
+﻿@model avtomoika.Models.Order
+
+@{Html.EnableClientValidation();}
+@{Html.EnableUnobtrusiveJavaScript();}
+
+@using (Ajax.BeginForm("CreateAjax", new AjaxOptions { UpdateTargetId = "partial-index" } ))
+{
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Client.Name, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Client.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Client.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Client.CarNumber, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Client.CarNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Client.CarNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.BoxName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownList("BoxName", ViewBag.Boxes as SelectList, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.BoxName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownList("State", ViewBag.State as SelectList, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Добавить" class="btn btn-success" />
+                @Ajax.ActionLink("Отмена", "IndexPartial", null, new AjaxOptions { UpdateTargetId = "partial-index" }, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

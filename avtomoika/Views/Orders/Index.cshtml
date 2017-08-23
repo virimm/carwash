@@ -1,0 +1,16 @@
+﻿@model IEnumerable<avtomoika.Models.Order>
+
+@{
+    ViewBag.Title = "Главная";
+}
+
+
+<div id="main">
+    <h2 align="center" class="alert-info">Главная страница</h2>
+    <div id="partial-index">
+        @Html.Action("IndexPartial");
+    </div>
+    <div id="partial-edit">
+    </div>
+</div>
+

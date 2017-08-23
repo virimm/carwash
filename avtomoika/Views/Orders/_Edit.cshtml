@@ -1,0 +1,52 @@
+﻿@model avtomoika.Models.Order
+
+@using (Ajax.BeginForm("EditAjax", new AjaxOptions { UpdateTargetId = "partial-index" }))
+{
+
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Date, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Date, new { @class = "form-control", @readonly = true })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Client.Name, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Client.Name, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Client.CarNumber, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Client.CarNumber, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.BoxName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownList("BoxName", ViewBag.Boxes as SelectList, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownList("State", ViewBag.State as SelectList, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Сохранить" class="btn btn-success" />
+                <input type="reset" value="Сбросить" class="btn btn-info" />
+                @Ajax.ActionLink("Отмена", "IndexPartial", null, new AjaxOptions { UpdateTargetId = "partial-index" }, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+
+}
